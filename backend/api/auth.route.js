@@ -1,13 +1,13 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import User from '../models/User.js';
+import User from '../models/user.model.js';
 
 const router = express.Router();
 
 // Register a new user
-router.post("/api/v1/auth/register", async(req,res) => {
+router.post("/register", async(req,res) => {
     try {
         const {username, email, password} = req.body;
 
@@ -26,7 +26,7 @@ router.post("/api/v1/auth/register", async(req,res) => {
 
 //Login
 
-router.post("/api/v1/auth/login", async (req,res) => {
+router.post("/login", async (req,res) => {
     try{
         const {email,password} = req.body;
         const user = await User.findOne({email});
