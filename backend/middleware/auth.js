@@ -4,7 +4,14 @@ function auth(req,res,next) {
     const authHeader = req.headers.authorization || "";
     const [scheme, token] = authHeader.split(" ");
 
-    if(scheme!== "Bearer" || !token) {
+    const tokenFromCookie = req.cookies?.access_token;
+
+    const token = 
+            scheme === 'Bearer' && tokenFromHeader?
+                tokenFromHeader:
+                tokenFromCookie;
+
+    if(!token) {
         return res.status(401).json({message:"Missing or invalid authorization header"});
     }
     try{
