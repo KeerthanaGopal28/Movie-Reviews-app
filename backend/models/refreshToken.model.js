@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const refreshTokenSchema = new mangoose.Schema({
+const refreshTokenSchema = new mongoose.Schema({
     user: {
-        type: mangoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         index: true
     },
