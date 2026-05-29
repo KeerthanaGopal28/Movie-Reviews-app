@@ -1,0 +1,45 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    background-color: rgb(68, 68, 68);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:white;
+}
+h3{
+    color:white;
+}
+.topnav{
+    overflow:hidden;
+    background-color: rgb(68, 68, 68);
+    padding:10px;
+}
+.topnav a{
+    float:left;
+    display:block;
+    color:white;
+    text-align:center;
+    padding:14px 16px;
+    text-decoration:none;
+    font-size:1.2rem;
+    text-transform:uppercase;
+}
+.login-form{
+    background-color:rgb(98, 98, 98);
+    width:400px;
+    padding:20px;
+    border-radius:11px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:80vh;
+}
+p a{
+    color:rgb(62, 111, 255)
+}

@@ -7,8 +7,16 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
-app.use(cors());
+//middleware to parse json bodies
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: 'http://http://127.0.0.1:5501/frontend/pages/',
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.send('JWT Auth API running');
