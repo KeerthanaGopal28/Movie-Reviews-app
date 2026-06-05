@@ -46,7 +46,7 @@ router.post("/login", async (req,res) => {
 
         const refreshToken = signRefreshToken(user, jti);
 
-        await persitRefreshToken({
+        await persistRefreshToken({
             user,
             refreshToken,
             jti,
@@ -58,6 +58,7 @@ router.post("/login", async (req,res) => {
         res.json({accessToken});
     }
     catch(e) {
+        console.error(e);
         res.status(500).json({message:"Server error"});
     }
 });
