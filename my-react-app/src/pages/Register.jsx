@@ -1,6 +1,6 @@
 import React from 'react'
 
-const resgiter = () => {
+const Register = () => {
   return (
     <div>
       Hello world
@@ -8,4 +8,4 @@ const resgiter = () => {
   )
 }
 
-export default resgiter
+export default Register
