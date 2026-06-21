@@ -79,96 +79,108 @@ export default function Movie() {
       <h3>{movieTitle}</h3>
 
       <section id="section">
-        <div className="row">
-          <div className="column">
-            <div className="card">
-              <h3>New Review</h3>
+  <div className="row">
+    <div className="column">
+      <div className="card">
+        <h3>New Review</h3>
+
+        <p>
+          <strong>Review:</strong>
+        </p>
+        <input
+          type="text"
+          value={newReview}
+          onChange={(e) => setNewReview(e.target.value)}
+        />
+
+        <p>
+          <strong>User:</strong>
+        </p>
+        <input
+          type="text"
+          value={newUser}
+          onChange={(e) => setNewUser(e.target.value)}
+        />
+
+        <br />
+        <br />
+
+        <button onClick={addReview}>Save</button>
+      </div>
+    </div>
+
+    {reviews.map((review) => (
+      <div className="column" key={review._id}>
+        <div className="card">
+          {editingId === review._id ? (
+            <>
+              <p>
+                <strong>Review:</strong>
+              </p>
+
+              <input
+                type="text"
+                value={editReview}
+                onChange={(e) => setEditReview(e.target.value)}
+              />
+
+              <p>
+                <strong>User:</strong>
+              </p>
+
+              <input
+                type="text"
+                value={editUser}
+                onChange={(e) => setEditUser(e.target.value)}
+              />
+
+              <br />
+              <br />
+
+              <button
+                onClick={() => updateReview(review._id)}
+              >
+                Save
+              </button>
+            </>
+          ) : (
+            <>
+              <h3>{movieTitle}</h3>
 
               <p>
                 <strong>Review:</strong>
-                <input
-                  type="text"
-                  value={newReview}
-                  onChange={(e) => setNewReview(e.target.value)}
-                />
+                <br />
+                {review.review}
               </p>
 
               <p>
                 <strong>User:</strong>
-                <input
-                  type="text"
-                  value={newUser}
-                  onChange={(e) => setNewUser(e.target.value)}
-                />
+                <br />
+                {review.user}
               </p>
 
-              <button onClick={addReview}>Save</button>
-            </div>
-          </div>
+              <button
+                onClick={() => {
+                  setEditingId(review._id);
+                  setEditReview(review.review);
+                  setEditUser(review.user);
+                }}
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => deleteReview(review._id)}
+              >
+                Delete
+              </button>
+            </>
+          )}
         </div>
-
-        {reviews.map((review) => (
-          <div className="row" key={review._id}>
-            <div className="column">
-              <div className="card">
-                {editingId === review._id ? (
-                  <>
-                    <p>
-                      <strong>Review:</strong>
-                      <input
-                        type="text"
-                        value={editReview}
-                        onChange={(e) => setEditReview(e.target.value)}
-                      />
-                    </p>
-
-                    <p>
-                      <strong>User:</strong>
-                      <input
-                        type="text"
-                        value={editUser}
-                        onChange={(e) => setEditUser(e.target.value)}
-                      />
-                    </p>
-
-                    <button
-                      onClick={() => updateReview(review._id)}
-                    >
-                      Save
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <p>
-                      <strong>Review:</strong> {review.review}
-                    </p>
-
-                    <p>
-                      <strong>User:</strong> {review.user}
-                    </p>
-
-                    <button
-                      onClick={() => {
-                        setEditingId(review._id);
-                        setEditReview(review.review);
-                        setEditUser(review.user);
-                      }}
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      onClick={() => deleteReview(review._id)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
     </>
   );
 }
