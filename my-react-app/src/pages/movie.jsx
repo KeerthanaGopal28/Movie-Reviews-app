@@ -1,11 +1,174 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 
-const Movie = () => {
+const APILINK =
+  "https://movie-reviews-fullstack-app.onrender.com/api/v1/reviews/";
+
+export default function Movie() {
+  const url = new URL(window.location.href);
+  const movieId = url.searchParams.get("id");
+  const movieTitle = url.searchParams.get("title");
+
+  const [reviews, setReviews] = useState([]);
+  const [newReview, setNewReview] = useState("");
+  const [newUser, setNewUser] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [editReview, setEditReview] = useState("");
+  const [editUser, setEditUser] = useState("");
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    const res = await fetch(APILINK + "movie/" + movieId);
+    const data = await res.json();
+    setReviews(data);
+  };
+
+  const addReview = async () => {
+    await fetch(APILINK + "new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: newUser,
+        review: newReview,
+        movieId,
+      }),
+    });
+
+    setNewReview("");
+    setNewUser("");
+    fetchReviews();
+  };
+
+  const updateReview = async (id) => {
+    await fetch(APILINK + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: editUser,
+        review: editReview,
+      }),
+    });
+
+    setEditingId(null);
+    fetchReviews();
+  };
+
+  const deleteReview = async (id) => {
+    await fetch(APILINK + id, {
+      method: "DELETE",
+    });
+
+    fetchReviews();
+  };
+
   return (
-    <div>
-      Hello World
-    </div>
-  )
-}
+    <>
+      <div className="topnav">
+        <a className="active" href="/">
+          Movies Site
+        </a>
+      </div>
 
-export default Movie
+      <h1>Reviews for:</h1>
+      <h3>{movieTitle}</h3>
+
+      <section id="section">
+        <div className="row">
+          <div className="column">
+            <div className="card">
+              <h3>New Review</h3>
+
+              <p>
+                <strong>Review:</strong>
+                <input
+                  type="text"
+                  value={newReview}
+                  onChange={(e) => setNewReview(e.target.value)}
+                />
+              </p>
+
+              <p>
+                <strong>User:</strong>
+                <input
+                  type="text"
+                  value={newUser}
+                  onChange={(e) => setNewUser(e.target.value)}
+                />
+              </p>
+
+              <button onClick={addReview}>Save</button>
+            </div>
+          </div>
+        </div>
+
+        {reviews.map((review) => (
+          <div className="row" key={review._id}>
+            <div className="column">
+              <div className="card">
+                {editingId === review._id ? (
+                  <>
+                    <p>
+                      <strong>Review:</strong>
+                      <input
+                        type="text"
+                        value={editReview}
+                        onChange={(e) => setEditReview(e.target.value)}
+                      />
+                    </p>
+
+                    <p>
+                      <strong>User:</strong>
+                      <input
+                        type="text"
+                        value={editUser}
+                        onChange={(e) => setEditUser(e.target.value)}
+                      />
+                    </p>
+
+                    <button
+                      onClick={() => updateReview(review._id)}
+                    >
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      <strong>Review:</strong> {review.review}
+                    </p>
+
+                    <p>
+                      <strong>User:</strong> {review.user}
+                    </p>
+
+                    <button
+                      onClick={() => {
+                        setEditingId(review._id);
+                        setEditReview(review.review);
+                        setEditUser(review.user);
+                      }}
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => deleteReview(review._id)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+    </>
+  );
+}

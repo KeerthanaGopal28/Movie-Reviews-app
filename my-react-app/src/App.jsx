@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import Index from './pages/Index';
-import Movie from './pages/Movie';
-import Register from './pages/Register';  
-import Login from './pages/Login';
-import Profile from './pages/Profile';
+import Index from './pages/Index.jsx';
+import Movie from './pages/Movie.jsx';
+import Register from './pages/Register.jsx';  
+import Login from './pages/Login.jsx';
+import Profile from './pages/Profile.jsx';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 
@@ -14,19 +14,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
     element: <Index />,
   },
   {
-    path: "/Login",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "/Movie",
+    path: "/movie",
     element: <Movie />,
   },
   {
-    path: "/Register",
+    path: "/register",
     element: <Register />,
   },
   {
-    path: "/Profile",
+    path: "/profile",
     element: <Profile />,
   },
 ]);
