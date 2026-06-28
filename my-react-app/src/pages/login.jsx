@@ -54,11 +54,11 @@ function Login() {
 
             <div className="login-container">
                 <div className="login-form">
-                    <h2>Login</h2>
-
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="email">Email:</label>
-                        <br />
+                    
+                        <h2>Login</h2>
+                    <form onSubmit={handleSubmit} id="login-form">
+                        <div>
+                            <label htmlFor="email">Email</label>
                         <input
                             type="email"
                             id="email"
@@ -66,30 +66,31 @@ function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                
-
-                        <label htmlFor="password">Password:</label>
-                        <br />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password</label>
+    
                         <input
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                        />
-                        
-
-                        <input type="submit" value="Login" />
-
+                        />        
+                        </div>
+                        <div>
+                             <input type="submit" value="Login" />
                         <p>
                             Don't have an account?{" "}
                             <Link to="/register">
                                 Register here
                             </Link>
                         </p>
+                        </div>              
+                       
                     </form>
+                    </div>
                 </div>
-            </div>
         </>
     );
 }
