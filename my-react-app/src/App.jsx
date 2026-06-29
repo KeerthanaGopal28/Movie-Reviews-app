@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import Index from './pages/Index.jsx';
 import Movie from './pages/Movie.jsx';
 import Register from './pages/Register.jsx';  

@@ -28,6 +28,7 @@ h3{
 .register-form{
     background-color:rgb(98, 98, 98);
     width:400px;
+    height:400px;
     padding:20px;
     border-radius:11px;
     display:flex;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "../styles/Movie.module.css";
 
 const APILINK =
   "https://movie-reviews-fullstack-app.onrender.com/api/v1/reviews/";
@@ -69,8 +70,8 @@ export default function Movie() {
 
   return (
     <>
-      <div className="topnav">
-        <a className="active" href="/">
+      <div className={styles.topnav}>
+        <a className={styles.active} href="/">
           Movies Site
         </a>
       </div>
@@ -79,9 +80,9 @@ export default function Movie() {
       <h3>{movieTitle}</h3>
 
       <section id="section">
-  <div className="row">
-    <div className="column">
-      <div className="card">
+  <div className={styles.row}>
+    <div className={styles.column}>
+      <div className={styles.card}>
         <h3>New Review</h3>
 
         <p>
@@ -110,9 +111,9 @@ export default function Movie() {
     </div>
 
     {reviews.map((review) => (
-      <div className="column" key={review._id}>
-        <div className="card">
-          {editingId === review._id ? (
+      <div className={styles.column} key={review._id}>
+        <div className={styles.card}  >
+          {editingId === review._id ?(
             <>
               <p>
                 <strong>Review:</strong>

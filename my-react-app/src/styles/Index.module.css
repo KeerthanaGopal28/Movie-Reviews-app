@@ -15,7 +15,7 @@ h3{
     background-color: rgb(68, 68, 68);
     padding:10px;
 }
-.topnav a{
+.active{
     float:left;
     display:block;
     color:white;
@@ -25,7 +25,7 @@ h3{
     font-size:1.5rem;
     text-transform:uppercase;
 }
-.search-container{
+.searchContainer{
     float:right;
 }
 form{
