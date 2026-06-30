@@ -42,5 +42,46 @@ h3{
     height:80vh;
 }
 p a{
-    color:rgb(62, 111, 255)
+    color:rgb(94, 133, 253);
+    font-weight:bold;
+}
+.registerContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:80vh;
+}
+.registerForm{
+    background-color:rgb(98, 98, 98);
+    width:400px;
+    height:400px;
+    padding:20px;
+    border-radius:11px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.registerInput{
+    font:15px system-ui;
+    width:300px;
+    color:black;
+    padding:4px 6px;
+    margin-bottom:10px;
+    border-radius:8px;
+    border:none;
+}
+.registerButton{
+    font:15px system-ui;
+    width:300px;
+    color:white;
+    padding:6px 9px;
+    margin-bottom:10px;
+    border-radius:8px;
+    border:none;
+    background-color:rgb(62, 111, 255);
+}
+.registerButton:hover{
+    background-color:rgb(92, 92, 242);
+    font-weight:bold;
+    cursor:pointer;
 }

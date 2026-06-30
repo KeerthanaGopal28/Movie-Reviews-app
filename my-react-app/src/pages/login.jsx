@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/login.css";
+import styles from "../styles/Login.module.css";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -48,45 +48,51 @@ function Login() {
 
     return (
         <>
-            <div className="topnav">
+            <div className={styles.topnav}>
                 <Link to="/">Movies Site</Link>
             </div>
 
-            <div className="login-container">
-                <div className="login-form">
+            <div className={styles.loginContainer}>
+                <div className={styles.loginForm}>
                     
                         <h2>Login</h2>
-                    <form onSubmit={handleSubmit} id="login-form">
-                        <div>
+                    <form onSubmit={handleSubmit}>
+                        
                             <label htmlFor="email">Email</label>
+                            <br/>
                         <input
+                            className={styles.loginInput}
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                        </div>
-                        <div>
+                        <br/>
+        
+                       
                             <label htmlFor="password">Password</label>
-    
+                            <br/>
                         <input
+                            className={styles.loginInput}
                             type="password"
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />        
-                        </div>
-                        <div>
-                             <input type="submit" value="Login" />
-                        <p>
+                        <br/>
+                             <input 
+                                className={styles.loginButton}
+                                type="submit" 
+                                value="Login" />
+                        <p >
                             Don't have an account?{" "}
-                            <Link to="/register">
+                            <Link to="/register" className={styles.registerLink}>
                                 Register here
                             </Link>
                         </p>
-                        </div>              
+                                    
                        
                     </form>
                     </div>

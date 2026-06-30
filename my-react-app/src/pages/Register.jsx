@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/register.css";
+import styles from "../styles/Register.module.css";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -46,20 +46,21 @@ function Register() {
 
     return (
         <>
-            <div className="topnav">
-                <Link className="active" to="/">
+            <div className={styles.topnav}>
+                <Link className={styles.active} to="/">
                     Movies Site
                 </Link>
             </div>
 
-            <div className="register-container">
-                <div className="register-form">
+            <div className={styles.registerContainer}>
+                <div className={styles.registerForm}>
                     <h2>Register</h2>
 
                     <form id="form" onSubmit={handleSubmit}>
                         <label htmlFor="username">Username:</label>
                         <br />
                         <input
+                            className={styles.registerInput}
                             type="text"
                             id="username"
                             name="username"
@@ -72,6 +73,7 @@ function Register() {
                         <label htmlFor="email">Email:</label>
                         <br />
                         <input
+                            className={styles.registerInput}
                             type="email"
                             id="email"
                             name="email"
@@ -84,6 +86,7 @@ function Register() {
                         <label htmlFor="password">Password:</label>
                         <br />
                         <input
+                            className={styles.registerInput}
                             type="password"
                             id="password"
                             name="password"
@@ -94,7 +97,11 @@ function Register() {
                         <br />
                         <br />
 
-                        <input type="submit" value="SignUp" />
+                        <input
+                            className={styles.registerButton}
+                            type="submit"
+                            value="SignUp"
+                        />
 
                         <p>
                             Already have an account?{" "}

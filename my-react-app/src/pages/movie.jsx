@@ -89,6 +89,7 @@ export default function Movie() {
           <strong>Review:</strong>
         </p>
         <input
+          className={styles.movieInput}
           type="text"
           value={newReview}
           onChange={(e) => setNewReview(e.target.value)}
@@ -98,6 +99,7 @@ export default function Movie() {
           <strong>User:</strong>
         </p>
         <input
+        className={styles.movieInput}
           type="text"
           value={newUser}
           onChange={(e) => setNewUser(e.target.value)}
@@ -120,6 +122,7 @@ export default function Movie() {
               </p>
 
               <input
+              className={styles.movieInput}
                 type="text"
                 value={editReview}
                 onChange={(e) => setEditReview(e.target.value)}
@@ -130,6 +133,7 @@ export default function Movie() {
               </p>
 
               <input
+              className={styles.movieInput}
                 type="text"
                 value={editUser}
                 onChange={(e) => setEditUser(e.target.value)}

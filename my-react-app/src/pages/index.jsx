@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Image from "../assets/hero.png";
 import styles from "../styles/Index.module.css";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const APILINK =
   "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=4b02060954d06627c40af5c1f3c15111&page=1";
@@ -36,10 +38,13 @@ export default function Index() {
     <>
       <div className={styles.topnav}>
   <a className={styles.active}>Movie Site</a>
-
+  <Link className={styles.link} to="/login">Login</Link>
+  <Link className={styles.link} to="/register">Register</Link>
+  
   <div className={styles.searchContainer}>
     <form onSubmit={handleSubmit} id="form">
       <input
+        className={styles.searchInput}
         type="search"
         placeholder="Search..."
         value={search}
@@ -47,6 +52,8 @@ export default function Index() {
       />
     </form>
   </div>
+  <Link className={styles.link} to="/profile">Profile</Link>
+  <Link className={styles.link} to="/logout">Logout</Link>
 </div>
 
       <section id="section">
