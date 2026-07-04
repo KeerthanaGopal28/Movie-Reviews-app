@@ -39,7 +39,8 @@ router.post("/login", async (req,res) => {
         if(!isMatch) {
             return res.status(400).json({message: "Invalid credentials"});
         }
-        
+        console.log(user);
+
         const accessToken = signAccessToken(user);
 
         const jti = createJti();
