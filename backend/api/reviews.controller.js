@@ -5,12 +5,14 @@ export default class ReviewsController {
         try{
             const movieId = parseInt(req.body.movieId);
             const review = req.body.review;
-            const user = req.body.user;
-
+            
+            
+            console.log("req.user=",req.user);
             const reviewResponse = await ReviewsDAO.addReview(
-                movieId,user,review
+                movieId,req.user.id,req.user.username,review
             );
             res.json({status:"success"});
+            
         }
         catch(e){
             res.status(500).json({error: e.message});
@@ -37,10 +39,10 @@ export default class ReviewsController {
         try{
             const reviewId = req.params.id;
             const review = req.body.review;
-            const user = req.body.user;
+            
 
             const reviewResponse = await ReviewsDAO.updateReview(
-                reviewId,user,review
+                reviewId,req.user.id,review
             );
             var { error } = reviewResponse;
             if(error)
@@ -57,7 +59,7 @@ export default class ReviewsController {
     static async apiDeleteReview(req,res,next){
         try{
             const reviewId = req.params.id;
-            const reviewResponse = await ReviewsDAO.deleteReview(reviewId);
+            const reviewResponse = await ReviewsDAO.deleteReview(reviewId,req.user.id);
             res.json({status:"success"});
         }
         catch(e){

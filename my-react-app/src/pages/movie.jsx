@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Movie.module.css";
+import {jwtDecode} from "jwt-decode";
 
 const APILINK =
   "https://movie-reviews-fullstack-app.onrender.com/api/v1/reviews/";
@@ -11,18 +12,22 @@ export default function Movie() {
 
   const [reviews, setReviews] = useState([]);
   const [newReview, setNewReview] = useState("");
-  const [newUser, setNewUser] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editReview, setEditReview] = useState("");
-  const [editUser, setEditUser] = useState("");
+  const token = localStorage.getItem("accessToken");
+
+  const currentUser = token ? jwtDecode(token) : null;
 
   useEffect(() => {
     fetchReviews();
   }, []);
+  console.log(reviews);
+
 
   const fetchReviews = async () => {
     const res = await fetch(APILINK + "movie/" + movieId);
     const data = await res.json();
+    console.log(data);
     setReviews(data);
   };
 
@@ -31,16 +36,16 @@ export default function Movie() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        user: newUser,
         review: newReview,
         movieId,
       }),
     });
 
     setNewReview("");
-    setNewUser("");
+  
     fetchReviews();
   };
 
@@ -49,9 +54,10 @@ export default function Movie() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        user: editUser,
+        
         review: editReview,
       }),
     });
@@ -63,11 +69,14 @@ export default function Movie() {
   const deleteReview = async (id) => {
     await fetch(APILINK + id, {
       method: "DELETE",
+       headers: {
+        Authorization: `Bearer ${token}`,
+    },
     });
 
     fetchReviews();
   };
-
+  
   return (
     <>
       <div className={styles.topnav}>
@@ -98,12 +107,7 @@ export default function Movie() {
         <p>
           <strong>User:</strong>
         </p>
-        <input
-        className={styles.movieInput}
-          type="text"
-          value={newUser}
-          onChange={(e) => setNewUser(e.target.value)}
-        />
+        <p  className={styles.movieInput}>{currentUser?.username}</p>
 
         <br />
         <br />
@@ -128,16 +132,7 @@ export default function Movie() {
                 onChange={(e) => setEditReview(e.target.value)}
               />
 
-              <p>
-                <strong>User:</strong>
-              </p>
-
-              <input
-              className={styles.movieInput}
-                type="text"
-                value={editUser}
-                onChange={(e) => setEditUser(e.target.value)}
-              />
+      
 
               <br />
               <br />
@@ -161,24 +156,27 @@ export default function Movie() {
               <p>
                 <strong>User:</strong>
                 <br />
-                {review.user}
+                {review.username}
               </p>
 
+            {currentUser?.id === review.user && (
+             <>
               <button
                 onClick={() => {
-                  setEditingId(review._id);
-                  setEditReview(review.review);
-                  setEditUser(review.user);
-                }}
+                setEditingId(review._id);
+                setEditReview(review.review);
+              }}
               >
-                Edit
-              </button>
+               Edit
+               </button>
 
-              <button
-                onClick={() => deleteReview(review._id)}
-              >
-                Delete
+                <button
+                 onClick={() => deleteReview(review._id)}
+                 >
+                 Delete
               </button>
+             </>
+             )}
             </>
           )}
         </div>

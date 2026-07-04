@@ -19,9 +19,10 @@ export default class ReviewsDAO{
     static async addReview(movieId,user,review){
         try{
             const reviewDoc = {
-                movieId: movieId,
-                user: user,
-                review: review,
+                movieId,
+                user: userId,
+                username,
+                review,
             }
             return await reviews.insertOne(reviewDoc);
         }
@@ -43,11 +44,17 @@ export default class ReviewsDAO{
     
     static async updateReview(reviewId,user,review){
         try{
-            const upatedResponse = await reviews.updateOne({
-                _id: new ObjectId(reviewId)
+            return await reviews.updateOne(
+            {
+                _id: new ObjectId(reviewId),
+                user: userId
             },
-           {$set: {user: user, review: review}})
-           return upatedResponse;    
+            {
+                $set: {
+                    review: review
+                }
+            }
+        );    
         }
         catch(e){
             console.error.apply(`Unable to update review:${e}`)
@@ -57,8 +64,10 @@ export default class ReviewsDAO{
 
     static async deleteReview(reviewId){
         try{
-            const deleteResponse = await reviews.deleteOne({_id: new ObjectId(reviewId)});
-            return deleteResponse;
+            return await reviews.deleteOne({
+            _id: new ObjectId(reviewId),
+            user: userId
+        });
         }
         catch(e){
             console.error(`Unable to delete review: ${e}`);

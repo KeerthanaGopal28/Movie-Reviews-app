@@ -32,8 +32,8 @@ function Login() {
             if (response.ok) {
                 alert("Login successful!");
 
-                if (data.token) {
-                    localStorage.setItem("token", data.token);
+                if (data.accessToken) {
+                    localStorage.setItem("accessToken", data.accessToken);
                 }
 
                 navigate("/");
@@ -45,6 +45,7 @@ function Login() {
             alert("An error occurred during login.");
         }
     };
+    console.log(localStorage.getItem("accessToken"));
 
     return (
         <>
