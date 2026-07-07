@@ -21,7 +21,7 @@ export default function Movie() {
   useEffect(() => {
     fetchReviews();
   }, []);
-  console.log(reviews);
+  console.log("Token:", token);
 
 
   const fetchReviews = async () => {
@@ -107,7 +107,7 @@ export default function Movie() {
         <p>
           <strong>User:</strong>
         </p>
-        <p  className={styles.movieInput}>{currentUser?.username}</p>
+        <p  className={styles.userName}>{currentUser?.username}</p>
 
         <br />
         <br />
