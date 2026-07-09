@@ -16,48 +16,22 @@ export default class ReviewsDAO{
         }
     }
 
-    // static async addReview(movieId,user,review){
-    //     try{
-    //         const reviewDoc = {
-    //             movieId,
-    //             user: userId,
-    //             username,
-    //             review,
-    //         }
-    //         return await reviews.insertOne(reviewDoc);
-    //     }
-    //     catch(e){
-    //         console.error.apply(`Unable to post review:${e}`)
-    //         return {error: e}
-    //     }
-    // }
+    static async addReview(movieId,userId,username,review){
+        try{
+            const reviewDoc = {
+                movieId,
+                user: userId,
+                username,
+                review,
+            }
+            return await reviews.insertOne(reviewDoc);
+        }
+        catch(e){
+            console.error.apply(`Unable to post review:${e}`)
+            return {error: e}
+        }
+    }
     
-    const addReview = async () => {
-  console.log("Button clicked");
-
-  try {
-    const res = await fetch(APILINK + "new", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        review: newReview,
-        movieId,
-      }),
-    });
-
-    console.log("Status:", res.status);
-
-    const data = await res.json();
-    console.log("Response:", data);
-
-    fetchReviews();
-  } catch (err) {
-    console.log(err);
-  }
-};
 
     static async getReview(reviewId){
         try{
