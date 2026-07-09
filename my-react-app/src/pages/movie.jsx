@@ -21,8 +21,6 @@ export default function Movie() {
   useEffect(() => {
     fetchReviews();
   }, []);
-  console.log("Token:", token);
-
 
   const fetchReviews = async () => {
     const res = await fetch(APILINK + "movie/" + movieId);
@@ -32,7 +30,8 @@ export default function Movie() {
   };
 
   const addReview = async () => {
-    await fetch(APILINK + "new", {
+    
+    const res =await fetch(APILINK + "new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +42,7 @@ export default function Movie() {
         movieId,
       }),
     });
-
+    
     setNewReview("");
   
     fetchReviews();

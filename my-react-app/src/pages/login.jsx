@@ -45,7 +45,6 @@ function Login() {
             alert("An error occurred during login.");
         }
     };
-    console.log(localStorage.getItem("accessToken"));
 
     return (
         <>
