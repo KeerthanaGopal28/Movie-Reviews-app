@@ -43,7 +43,7 @@ export default class ReviewsDAO{
         }
     }
     
-    static async updateReview(reviewId,user,review){
+    static async updateReview(reviewId,userId,review){
         try{
             return await reviews.updateOne(
             {
@@ -63,7 +63,7 @@ export default class ReviewsDAO{
         }
     }
 
-    static async deleteReview(reviewId){
+    static async deleteReview(reviewId,userId){
         try{
             return await reviews.deleteOne({
             _id: new ObjectId(reviewId),
