@@ -12,7 +12,10 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',  
+    origin: [
+      'http://localhost:5173',
+      'https://movie-reviews-fullstack-bfwyuvx00-keerthana-hgs-projects.vercel.app'
+    ],  
     credentials: true,
   })
 );
