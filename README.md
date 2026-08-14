@@ -3,6 +3,7 @@
 A full-stack Movie Review web application that allows users to browse movies, register/login securely, and post, update, or delete their own reviews. The application is built using the MERN stack with JWT authentication and MongoDB Atlas for cloud data storage.
 
 ---
+https://movie-reviews-fullstack-o70cd6lo0-keerthana-hgs-projects.vercel.app/
 
 ## 🚀 Features
 
